@@ -15,7 +15,15 @@
             <version>7.0.8</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.22</version>
+        </dependency>
+
     </dependencies>
+
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
