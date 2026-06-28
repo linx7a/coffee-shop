@@ -4,13 +4,17 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
+import org.slf4j.Logger;
+
 @Component
 @Aspect
 public class LoggingAspect {
+    private static final Logger log = LoggerFactory.getLogger(LoggingAspect.class);
     @Pointcut("execution(* coffeeshop.Barista.brew(..))")
     public void brewPointcut() {}
 
@@ -20,7 +24,7 @@ public class LoggingAspect {
         Object result = joinPoint.proceed();
         long duration = System.currentTimeMillis() - start;
 
-        System.out.println("Время: " + duration + " мс");
+        log.info("Время: " + duration + " мс");
 
         return result;
     }
@@ -40,7 +44,7 @@ public class LoggingAspect {
         long orderDuration = System.currentTimeMillis() - start;
         System.out.println("Ваш заказ готов. Итого: " + order.getTotalPrice()
                         + " руб.");
-        System.out.println("[LOG] Время обработки заказа: " + orderDuration + " мс");
+        log.info("Время обработки заказа: " + orderDuration + " мс");
         return result;
     }
 }
